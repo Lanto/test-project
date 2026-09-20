@@ -26,6 +26,51 @@ it('displays multiple products', function () {
     expect(Product::count())->toBe(3);
 });
 
+it('can create a product through the crud form', function () {
+    $response = $this->post('/products', [
+        'name' => 'Laravel Book',
+        'price' => 49.90,
+        'active' => true,
+    ]);
+
+    $response->assertRedirect('/products');
+    $this->assertDatabaseHas('products', [
+        'name' => 'Laravel Book',
+        'price' => 49.90,
+    ]);
+});
+
+it('can update a product through the crud form', function () {
+    $product = Product::factory()->create([
+        'name' => 'Old name',
+        'price' => 10.00,
+    ]);
+
+    $response = $this->put('/products/'.$product->id, [
+        'name' => 'New name',
+        'price' => 25.50,
+        'active' => true,
+    ]);
+
+    $response->assertRedirect('/products');
+    $this->assertDatabaseHas('products', [
+        'id' => $product->id,
+        'name' => 'New name',
+        'price' => 25.50,
+    ]);
+});
+
+it('can delete a product', function () {
+    $product = Product::factory()->create();
+
+    $response = $this->delete('/products/'.$product->id);
+
+    $response->assertRedirect('/products');
+    $this->assertDatabaseMissing('products', [
+        'id' => $product->id,
+    ]);
+});
+
 uses(RefreshDatabase::class);
 
 it('can create a product in database', function () {
