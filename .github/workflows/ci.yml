@@ -3,11 +3,12 @@ name: CI Laravel
 on:
   push:
     branches:
+      - main
       - develop
-      - "features/**"
 
   pull_request:
     branches:
+      - main
       - develop
 
 jobs:
