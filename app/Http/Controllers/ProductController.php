@@ -33,7 +33,7 @@ class ProductController extends Controller
 
         Product::create($validated);
 
-        return redirect()->route('products.index')->with('success', 'Produit ajouté avec succès.');
+        return redirect()->route('products.index')->with('success', 'Produit ajouté avec succès !');
     }
 
     public function show(Product $product): View
@@ -56,13 +56,13 @@ class ProductController extends Controller
 
         $product->update($validated);
 
-        return redirect()->route('products.index')->with('success', 'Produit mis à jour avec succès.');
+        return redirect()->route('products.index')->with('success', 'Produit mis à jour avec succès !');
     }
 
     public function destroy(Product $product): RedirectResponse
     {
         $product->delete();
 
-        return redirect()->route('products.index')->with('success', 'Produit supprimé avec succès.');
+        return redirect()->route('products.index')->with('success', 'Produit supprimé avec succès !');
     }
 }
