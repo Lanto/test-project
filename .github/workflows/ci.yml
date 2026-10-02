@@ -66,5 +66,8 @@ jobs:
       - name: Run Laravel Pint
         run: ./vendor/bin/pint --test
 
+      - name: Run Static Analysis (PHPStan / Larastan)
+        run: ./vendor/bin/phpstan analyse --error-format=github --result-cache-path=/tmp/phpstan/resultCache.php
+
       - name: Run PHPUnit
         run: php artisan test
