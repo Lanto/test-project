@@ -1,0 +1,23 @@
+includes:
+    - vendor/larastan/larastan/extension.neon
+
+parameters:
+    paths:
+        - app/
+        - config/
+        - database/
+        - routes/
+
+    # Niveau d'analyse (0 = très tolérant, 9 = ultra strict)
+    # Le niveau 5 est le meilleur point de départ pour une application Laravel existante
+    level: 5
+
+    # Détection automatique du modèle et des relations
+    # ignoreErrors:
+    #     - '#Unsafe usage of new static\(\)#'
+
+    # Utile si vous avez du code legacy sans types précis
+    # checkMissingIterableValueType: false
+
+    # Redirige le dossier temporaire et le cache de résultat
+    tmpDir: build/phpstan
