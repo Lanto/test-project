@@ -66,8 +66,16 @@ jobs:
       - name: Run Laravel Pint
         run: ./vendor/bin/pint --test
 
+      - name: Cache PHPStan result cache
+        uses: actions/cache@v4
+        with:
+          path: build/phpstan
+          key: ${{ runner.os }}-phpstan-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-phpstan-
+
       - name: Run Static Analysis (PHPStan / Larastan)
-        run: ./vendor/bin/phpstan analyse --error-format=github --result-cache-path=/tmp/phpstan/resultCache.php
+        run: ./vendor/bin/phpstan analyse --error-format=github
 
       - name: Run PHPUnit
         run: php artisan test
